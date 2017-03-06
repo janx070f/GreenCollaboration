@@ -1,0 +1,26 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>@Model.PageId</p>
+
+<p>@Model.Parent.Name</p>
+
+<p>@Model.CreateDate</p>
+<p>@Model.IconName</p>
+
+<p>@Model.Url</p>
+
+  
+<div class="col col-md-3">
+    @CmsApi.GetProperty(Model, "textbox")
+</div>
+<div class="col col-md-3">
+    @CmsApi.GetProperty(Model, "text")
+</div>
+<div class="col col-md-3">
+    @CmsApi.GetProperty(Model, "text 2")
+</div>

@@ -1,0 +1,164 @@
+﻿@model IEnumerable<GreenCollaboration.Models.CmsPage>
+
+@{
+    ViewBag.Title = "Pages";
+}
+
+
+<div id="main">
+    <ol class="breadcrumb">
+        <li><a href="/Cms/Admin/index">Home</a></li>
+        <li class="active">
+            @ViewBag.Title
+        </li>
+    </ol>
+    <!-- start:breadcrumb -->
+    @*<ol class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li>Dashboard</li>
+        <li class="active">Pages</li>
+    </ol>*@
+    <!-- end:breadcrumb -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                @ViewBag.Title
+            </h2>
+        </div>
+    </div>
+    <button class="btn btn-info" id="add-page"><i class="fa fa-plus"></i></button>
+    <table class="table">
+        <tr>
+            <th>
+                Parent
+            </th>
+            <th>
+                Template
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alias)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShowInMenu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Level)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IconName)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Parent.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Template.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Alias)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Url)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShowInMenu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Level)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IconName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditPage", new { id = item.PageId }) |
+                    @Html.ActionLink("Delete", "DeletePage", new { id = item.PageId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+    <div id="addform" class="well">
+        
+        <h3>Add Page</h3>
+        <form class="card-body" id="add-page" action="/Cms/Admin/CreatePage" method="post">
+            @Html.AntiForgeryToken()
+
+          
+
+            <div class="form-group">
+                <label for="pagename">Page Name</label>
+                <input id="pagename" type="text" class="form-control" name="Name" placeholder="pagename" />
+            </div>
+            <div class="form-group">
+                <label for="showinmenu">Show In Menu</label>
+                <input id="showinmenu" type="checkbox" value="true" name="ShowInMenu" />
+            </div>
+            <div class="form-group">
+                <label for="ParentId">Parent</label>
+                @Html.DropDownList("ParentId", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label for="TemplateId">Template</label>
+                @Html.DropDownList("TemplateId", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-danger" id="cancel-prop" type="reset">Cancel</button>
+                <button class="btn btn-success" type="submit">Save</button>
+
+            </div>
+
+        </form>
+
+    </div>
+@section scripts
+{
+    <script>
+
+        $("#add-page").on('click',
+            function() {
+                $("#addform").addClass("enabled");
+                $("#add-page").prop("disabled", true);
+
+            }
+        );
+
+        $("#cancel-prop").on('click',
+            function(e) {
+                e.preventDefault();
+                $("#form").trigger("reset");
+                $("#addform").removeClass("enabled");
+                $("#add-page").prop("disabled", false);
+            });
+
+    </script>
+
+
+}

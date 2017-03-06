@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Template";
+}
+
+
+<div id="main">
+    <!-- breadcrumb -->
+    @Html.Partial("_Breadcrumb")
+
+
+    <div id="summernote">Hello Summernote</div>
+</div>
+@section scripts
+{
+    <script>
+        $('#summernote').summernote({
+            height: 300,                 // set editor height
+            minHeight: null,             // set minimum height of editor
+            maxHeight: null,             // set maximum height of editor
+            focus: true                  // set focus to editable area after initializing summernote
+        });
+    </script>
+  
+}
+
+   

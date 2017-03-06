@@ -1,0 +1,61 @@
+﻿@model MvcHtmlString
+
+@{
+    ViewBag.Title = "Templates";
+}
+@section style{
+
+    <link href="~/Scripts/codemirror-2.37/lib/codemirror.css" rel="stylesheet" />
+}
+
+<div id="main">
+    <!-- breadcrumb -->
+    @*Html.Partial("_Breadcrumb")*@
+
+    @Html.Action("TemplatePartial")
+
+    <input id="templateName" type="text" placeholder=" New Page Name" required />
+    <button class="btn btn-primary " id="save">Save</button>
+
+    <hr />
+    <section class="panel">
+        <header class="panel-heading"> Code Area</header>
+        <textarea class="panel-body" id="textarea">@Html.Raw(Model)</textarea>
+    </section>
+
+
+
+</div>
+@section scripts{
+    <script src="~/Scripts/codemirror-2.37/lib/codemirror.js"></script>
+    <script>
+        $(function () {
+            var $templateName = $("#templateName");
+            //var $textarea = $("#textarea");
+            var codearea = $("#textarea")[0];
+            var codemirror = CodeMirror.fromTextArea(codearea,
+            {
+                lineNumbers: true,
+                theme: "cobalt"
+            });
+
+
+            $("#save")
+                .on("click",
+                    function () {
+                        if ($templateName.length > 0) {
+                            $.ajax(
+                            {
+                                type: "POST",
+                                url: "/cms/admin/savetemplate",
+                                data: { templateName: $templateName.val, html: codemirror.val },
+                                success: function (data) {
+                                    console.log(data);
+                                    window.Location = "/Cms/Admin/Templates/" + data;
+                                }
+                            });
+                        }
+                    });
+        })
+    </script>
+}

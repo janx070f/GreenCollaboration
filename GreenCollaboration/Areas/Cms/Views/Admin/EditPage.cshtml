@@ -1,0 +1,169 @@
+﻿@using GreenCollaboration.Areas.Cms.Extentions
+@model GreenCollaboration.Models.CmsPage
+
+@{
+    ViewBag.Title = "EditPage";
+}
+@section style{
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+}
+
+<div id="main">
+    <ol class="breadcrumb">
+        <li><a href="/Cms/Admin/index">Home</a></li>
+        <li class="active">
+            @ViewBag.Title
+        </li>
+    </ol>
+    <h2 class="page-header">
+        @ViewBag.Title
+    </h2>
+    <form action="/Cms/Admin/Editpage?PageId=@Model.PageId" method="post">
+        @*<button type="submit">Save</button>*@
+        <button class="btn btn-info" id="add-page"><i class="fa fa-plus"></i></button>
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(p => p.Name)
+        @Html.HiddenFor(p => p.PageId)
+        @Html.HiddenFor(p => p.Alias)
+        @Html.HiddenFor(p => p.TemplateId)
+        @Html.HiddenFor(p => p.ParentId)
+        @Html.HiddenFor(p => p.Level)
+        @Html.HiddenFor(p => p.Order)
+        @Html.HiddenFor(p => p.CreateDate)
+        @*@Html.HiddenFor(p => p.Template.Name)
+            @Html.HiddenFor(p => p.ShowInMenu)*@
+        @Html.HiddenFor(p => p.Url)
+
+        <!--Show details about page-->
+        <!--Render properties-->
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Property Name</th>
+                <th>Property Editor</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var property in Model.Properties)
+            {
+                <tr>
+                    <td>
+                        @property.Name <br/> <span class="text-muted">@property.Alias</span>
+                    </td>
+                    <td>
+                        @AdminHelper.RenderPropType(property.Type, property.Value, property.Alias)
+                    </td>
+                    <td>
+                        <a href="/Cms/Admin/deleteProperty?id=@property.PropertyId"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+
+
+        <dl class="dl-horizontal">
+
+
+            <dd>
+                @Html.DisplayFor(model => model.Parent.Name)
+            </dd>
+
+            <dd>
+                @Html.DisplayFor(model => model.Template.Name)
+            </dd>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreateDate)
+            </dd>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dd>
+                @Html.DisplayFor(model => model.Alias)
+            </dd>
+
+            <dd>
+                @Html.DisplayFor(model => model.Url)
+            </dd>
+
+            <dd>
+                @Html.EditorFor(model => model.ShowInMenu)
+            </dd>
+
+
+
+            <dd>
+                @Html.DisplayFor(model => model.Level)
+            </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Order)
+            </dd>
+            <dd>
+                @Html.DisplayFor(model => model.IconName)
+            </dd>
+
+        </dl>
+    </form>
+    <div id="addform" class="well">
+
+        <h3>Add Page</h3>
+        <form action="/Cms/Admin/CreateProperty" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="PageId" value="@Model.PageId"/>
+
+
+            <div class="form-group">
+                <label for="propname">Property Name</label>
+                <input id="propname" type="text" class="form-control" name="Name" placeholder="propname"/>
+            </div>
+
+            <div class="form-group">
+                <label for="propeditor">Property Type</label>
+                @Html.DropDownList("Type", AdminHelper.GetPropTypes(), htmlAttributes: new {@id = "propeditor", @class = "form-control"})
+            </div>
+
+
+            <div class="form-group">
+                <button class="btn btn-danger" id="cancel-prop" type="reset">Cancel</button>
+                <button class="btn btn-success" type="submit">Save</button>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts
+    {
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+    <script>
+        $('.editor').summernote();
+
+    </script>
+
+
+    <script>
+
+        $("#add-page").on('click',
+            function () {
+                $("#addform").addClass("enabled");
+                $("#add-page").prop("disabled", true);
+
+            }
+        );
+
+        $("#cancel-prop").on('click',
+            function (e) {
+                e.preventDefault();
+                $("#form").trigger("reset");
+                $("#addform").removeClass("enabled");
+                $("#add-page").prop("disabled", false);
+            });
+
+    </script>
+
+
+}

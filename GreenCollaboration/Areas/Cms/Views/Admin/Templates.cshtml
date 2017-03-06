@@ -1,0 +1,74 @@
+﻿@model MvcHtmlString
+
+@{
+    ViewBag.Title = "Templates";
+}
+@section style{
+
+    <link href="~/Scripts/codemirror-2.37/lib/codemirror.css" rel="stylesheet" />
+}
+
+<div id="main">
+    <!-- breadcrumb -->
+    @Html.Partial("_Breadcrumb")
+
+    @Html.Action("TemplatePartial")
+
+    @*<button class="btn btn-success" id="edit"> Edit</button>*@
+    <button class="btn btn-primary" id="save"> Save</button>
+    <button class="btn btn-danger" id="delete">Delete</button>
+    <a class="btn btn-info" href="/Cms/Admin/CreateTemplate" id="create">Create New </a>
+
+    <hr />
+<section class="panel">
+    <header class="panel-heading"> Code Area</header>
+    <textarea class="panel-body" id="textarea">@Html.Raw(Model)</textarea>
+</section>
+</div>
+@section scripts{
+<script src="~/Scripts/codemirror-2.37/lib/codemirror.js"></script>
+    <script>
+        $(function () {
+            var $templateName = $("#templateName");
+            //var $textarea = $("#textarea");
+                var codearea = $("#textarea")[0];
+                var codemirror = CodeMirror.fromTextArea(codearea,
+                {
+                    lineNumbers: true,
+                    theme: "cobalt"
+
+                });
+
+            $("#save")
+                .on("click",
+                    function () {
+                        if ($templateName.length > 0) {
+                            $.ajax(
+                            {
+                                type: "POST",
+                                url: "/cms/admin/savetemplate",
+                                //data: { templateName: $templateName.val(), html: $textarea.val() },
+                                data: { templateName: $templateName.val(), html: CodeMirror.getValue() },
+                                success:function(data) {
+                                    //console.log(data);
+                                    window.location = "/Cms/Admin/Templates/" + data;
+                                }
+                            });
+                        }
+                    });
+            $("#delete")
+                .on("click",
+                    function() {
+                        $.ajax({
+                            type: "GET",
+                            url: "/Cms/Admin/DeleteTemplate",
+                            data: { templateName: urlsegment },
+                            sucess: function() {
+                                window.location = "/Cms/Admin/Templates";
+                            }
+                        });
+                    });
+        })
+    </script>
+}
+

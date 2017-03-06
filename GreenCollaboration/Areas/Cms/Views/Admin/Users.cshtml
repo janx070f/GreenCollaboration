@@ -1,0 +1,163 @@
+﻿@using System.Collections
+@using GreenCollaboration.Areas.Cms.Extentions
+@model IEnumerable<GreenCollaboration.Models.ApplicationUser>
+
+
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>Users</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            Roles
+        </th>
+        <th>
+            Actions
+        </th>
+
+    </tr>
+
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => user.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => user.Email)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => user.PhoneNumber)
+            </td>
+            <td>
+                @foreach (var role in IdentityService.GetRoles())
+                {
+                    if (IdentityService.IsUserInRole(user.Id, role.Name))
+                    {
+                        <a href="#" class="update-role" data-userid="@user.Id" data-value="false" data-role="@role.Name" style="color: Green">@role.Name</a>
+                    }
+                    else
+                    {
+                        <a href="#" class="update-role" data-userid="@user.Id" data-value="true" data-role="@role.Name" style="color:red">@role.Name</a> 
+
+                    }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = user.Id }) |
+                @* @Html.ActionLink("Details", "Details", new {id = user.Id}) |*@
+                @Html.ActionLink("Delete", "DeleteUser", new { id = user.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+<div id="add-user-form" class="well">
+
+    <h3>Add User</h3>
+    <form class="card-body" id="add-page" action="/Cms/Admin/CreateUser" method="post">
+        @Html.AntiForgeryToken()
+
+
+
+        <div class="form-group">
+            <label for="username">User Name</label>
+            <input id="username" type="text" class="form-control" name="UserName" placeholder="username" />
+        </div>
+        <div class="form-group">
+            <label for="useremail">Email</label>
+            <input id="useremail" type="email" class="form-control" name="Email" placeholder="email" />
+        </div>
+        <div class="form-group">
+            <label for="phonenumber">Phone Number</label>
+            <input id="phonenumber" type="text" class="form-control" name="PhoneNumber" placeholder="phone" />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" class="form-control" name="Password" placeholder="password" />
+        </div>
+        <div class="form-group">
+            <button class="btn btn-danger" id="cancel-prop" type="reset">Cancel</button>
+            <button class="btn btn-success" type="submit">Save</button>
+
+        </div>
+
+    </form>
+    <h3>Add Role</h3>
+    <form class="card-body" id="add-role" action="/Cms/Admin/CreateRole" method="post">
+        @Html.AntiForgeryToken()
+
+
+
+        <div class="form-group">
+            <label for="rolename">User Name</label>
+            <input id="rolename" type="text" class="form-control" name="RoleName" placeholder="rolename" />
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-danger" id="cancel-prop" type="reset">Cancel</button>
+            <button class="btn btn-success" type="submit">Save</button>
+
+        </div>
+
+    </form>
+</div>
+@section scripts
+{
+    <script>
+
+        $("#add-page").on('click',
+            function () {
+                $("#add-user-form").addClass("enabled");
+                $("#add-page").prop("disabled", true);
+
+            }
+        );
+
+        $("#cancel-prop").on('click',
+            function (e) {
+                e.preventDefault();
+                $("#form").trigger("reset");
+                $("#addform").removeClass("enabled");
+                $("#add-page").prop("disabled", false);
+            });
+
+    </script>
+    <script>
+        $(".update-role")
+            .click(function(event) {
+                event.preventDefault();
+                var id = $(this).data("userid");
+                var role = $(this).data("role");
+                var value = $(this).data("value");
+                $.ajax({
+                    url: '/Cms/Admin/UpdateUserRole',
+                    type: 'Get',
+                    data: { userid: id, rolename: role, add: value },
+                    success: function(data) {
+                        window.location = '/Cms/Admin/Users';
+                    }
+                });
+            });
+
+
+    </script>
+
+}

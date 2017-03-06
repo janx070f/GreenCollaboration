@@ -1,0 +1,276 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<div id="main">
+   
+    <!-- breadcrumb -->
+    @Html.Partial("_Breadcrumb")
+   
+
+<div class="row" id="home-content">
+<div class="col-lg-8">
+    <!-- start:state overview -->
+    <div class="row state-overview">
+        <div class="col-lg-6 col-sm-6">
+            <section class="panel">
+                <div class="symbol terques">
+                    <i class="fa fa-envelope-o" data-original-title="" title=""></i>
+                </div>
+                <div class="value">
+                    <h1 class="count"></h1>
+                    <p>New Mails</p>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+            <section class="panel">
+                <div class="symbol red">
+                    <i class="fa fa-user" data-original-title="" title=""></i>
+                </div>
+                <div class="value">
+                    <h1 class="count2"></h1>
+                    <p>Visitors Today</p>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+            <section class="panel">
+                <div class="symbol yellow">
+                    <i class="fa fa fa-users" data-original-title="" title=""></i>
+                </div>
+                <div class="value">
+                    <h1 class="count3"></h1>
+                    <p> Page Views Today</p>
+                </div>
+            </section>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+            <section class="panel">
+                <div class="symbol purple">
+                    <i class="fa fa-thumbs-o-up" data-original-title="" title=""></i>
+                </div>
+                <div class="value">
+                    <h1 class="count4"></h1>
+                    <p>Total Likes</p>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- end:state overview -->
+
+</div>
+<div class="col-lg-4">
+    <!-- start:user info table -->
+    <section class="panel">
+        <div class="panel-body">
+            <a href="#" class="task-thumb">
+                <img src="/img/user/avatar-1.jpg" alt="">
+            </a>
+            <div class="task-thumb-details">
+                <h1><a href="#">Chef Marinka</a></h1>
+                <p>Senior Chef Master</p>
+            </div>
+        </div>
+
+        <table class="table table-hover personal-task">
+            <tbody>
+            <tr>
+                <td>
+                    <i class=" fa fa-tasks" data-original-title="" title=""></i>
+                </td>
+                <td>New Task Issued</td>
+                <td> 02</td>
+            </tr>
+            <tr>
+                <td>
+                    <i class="fa fa-exclamation-triangle" data-original-title="" title=""></i>
+                </td>
+                <td>Task Pending</td>
+                <td> 14</td>
+            </tr>
+            <tr>
+                <td>
+                    <i class="fa fa-envelope" data-original-title="" title=""></i>
+                </td>
+                <td>Inbox</td>
+                <td> 45</td>
+            </tr>
+            <tr>
+                <td>
+                    <i class=" fa fa-bell-o" data-original-title="" title=""></i>
+                </td>
+                <td>New Notification</td>
+                <td> 09</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+    <!-- end:user info table -->
+    <!-- start:user info -->
+    @*<div class="panel panel-default">
+                    <div class="panel-heading">
+                        <header class="panel-title">
+                            <div class="text-center">
+                                <strong>Agent</strong> Author<strong>.</strong>
+                            </div>
+                        </header>
+                    </div>
+                    <div class="panel-body">
+                        <div class="text-center" id="author">
+                            <img src="/img/user/avatar-3.jpg">
+                            <h3>John Doe</h3>
+                            <small class="label label-warning">From USA</small>
+                            <p>Aku kie sing sok ngedolke omah-omah kae, yo iso di omongke makelar ngono sih. Tapi makelar nek payu ne akeh yo dadi sugih bro. Tenanan ra ngapusi.</p>
+                            <p class="sosmed-author">
+                                <a href="#"><i class="fa fa-facebook" data-toggle="tooltip" data-placement="top" title="" data-original-title="Facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter"></i></a>
+                                <a href="#"><i class="fa fa-google-plus" data-toggle="tooltip" data-placement="top" title="" data-original-title="Google Plus"></i></a>
+                                <a href="#"><i class="fa fa-linkedin" data-toggle="tooltip" data-placement="top" title="" data-original-title="Linkedin"></i></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>*@
+</div>
+
+
+<!-- end:user info -->
+<div class="row">
+    <div class="col-lg-6">
+        <!-- start:new earning -->
+        <div class="panel terques-chart">
+            <div class="panel-body chart-texture">
+                <div class="chart">
+                    <div class="heading">
+                        <span>Senin</span>
+                        <strong>$ 67,00 | 25%</strong>
+                    </div>
+                    <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%" data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color="" data-highlight-line-color="#fff" data-spot-radius="4" data-data="[200,135,667,333,526,996,564,123,890,564,455]">
+                        <canvas width="283" height="75" style="display: inline-block; width: 283px; height: 75px; vertical-align: top;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-tittle">
+                <span class="title">New Earning</span>
+                <span class="value">
+                    <a href="#" class="active">Market</a>
+                    |
+                    <a href="#">Referal</a>
+                    |
+                    <a href="#">Online</a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- end:new earning-->
+    <div class="col-lg-6">
+        <!-- start:total earning-->
+        <div class="panel green-chart">
+            <div class="panel-body">
+                <div class="chart">
+                    <div class="heading">
+                        <span>June</span>
+                        <strong>12 Days | 85%</strong>
+                    </div>
+                    <div id="barchart">
+                        <canvas width="294" height="65" style="display: inline-block; width: 294px; height: 65px; vertical-align: top;"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="chart-tittle">
+                <span class="title">Total Earning</span>
+                <span class="value">$, 96,23,123</span>
+            </div>
+        </div>
+        <!-- end:total earning -->
+    </div>
+            
+</div>
+<div class="row">
+    
+    <div class="col-lg-12">
+        <!--work progress start-->
+        <section class="panel">
+            <div class="panel-body progress-panel">
+                <div class="task-progress">
+                    <h1>Work Progress</h1>
+                    <p>Chef Marink</p>
+                </div>
+                <div class="task-option">
+                    <select class="btn btn-default" data-original-title="" title="">
+                        <option>Chef Marinka</option>
+                        <option>Chef Juna</option>
+                        <option>Chef Aldi</option>
+                    </select>
+                </div>
+            </div>
+            <table class="table table-hover personal-task">
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>
+                        Target Sell
+                    </td>
+                    <td>
+                        <span class="badge bg-important">75%</span>
+                    </td>
+                    <td>
+                        <div id="work-progress1"><canvas width="47" height="20" style="display: inline-block; width: 47px; height: 20px; vertical-align: top;"></canvas></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>
+                        Product Delivery
+                    </td>
+                    <td>
+                        <span class="badge bg-success">43%</span>
+                    </td>
+                    <td>
+                        <div id="work-progress2"><canvas width="47" height="22" style="display: inline-block; width: 47px; height: 22px; vertical-align: top;"></canvas></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>
+                        Payment Collection
+                    </td>
+                    <td>
+                        <span class="badge bg-info">67%</span>
+                    </td>
+                    <td>
+                        <div id="work-progress3"><canvas width="47" height="22" style="display: inline-block; width: 47px; height: 22px; vertical-align: top;"></canvas></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>
+                        Work Progress
+                    </td>
+                    <td>
+                        <span class="badge bg-warning">30%</span>
+                    </td>
+                    <td>
+                        <div id="work-progress4"><canvas width="47" height="22" style="display: inline-block; width: 47px; height: 22px; vertical-align: top;"></canvas></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>
+                        Delivery Pending
+                    </td>
+                    <td>
+                        <span class="badge bg-primary">15%</span>
+                    </td>
+                    <td>
+                        <div id="work-progress5"><canvas width="47" height="22" style="display: inline-block; width: 47px; height: 22px; vertical-align: top;"></canvas></div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </section>
+        <!--work progress end-->
+    </div>
+</div>
+</div>
+    </div>

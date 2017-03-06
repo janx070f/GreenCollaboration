@@ -1,0 +1,13 @@
+﻿@model MvcHtmlString
+
+@section style{
+
+    <link href="~/Content/Admin.css" rel="stylesheet" />
+}
+<!-- start:breadcrumb -->
+<ol class="breadcrumb">
+    <li><a href="/Cms/Admin/index">Home</a></li>
+    <li class="active">
+        @ViewBag.Title
+    </li>
+</ol>
