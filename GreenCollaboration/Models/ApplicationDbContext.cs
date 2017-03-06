@@ -10,7 +10,11 @@ namespace GreenCollaboration.Models
         {
             Configuration.LazyLoadingEnabled = false;
         }
+        public DbSet<Menu> Menus { get; set; }
 
+
+
+        //CMS Stuff
         public DbSet<CmsPage> CmsPages { get; set; }
         public DbSet<CmsProperty> CmsProperties { get; set; }
         public DbSet<CmsTemplate> CmsTemplates { get; set; }
