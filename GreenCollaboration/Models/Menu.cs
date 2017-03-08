@@ -9,6 +9,6 @@ namespace GreenCollaboration.Models
         public string LinkName { get; set; }
         public string MenuUrl { get; set; }
         public int SortOrder { get; set; }
-        public int Number { get; set; } 
+
     }
 }
